@@ -20,6 +20,7 @@ module.exports = {
     'prefer-destructuring': ['error', { object: true, array: false }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'no-bitwise': 'off',
-    'import/extensions': 'off'
+    'import/extensions': 'off',
+    'linebreak-style': ['error', 'unix']
   }
 }

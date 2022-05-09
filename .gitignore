@@ -25,11 +25,11 @@ coverage
 .lock-wscript
 
 # Compiled
-dist
+
 
 # Dependency directories
-vendor
-node_modules
+/vendor
+/node_modules
 jspm_packages
 
 # Optional npm cache directory
