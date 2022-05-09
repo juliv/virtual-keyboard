@@ -1,0 +1,213 @@
+@import "vendor/normalize.css";
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+
+body {
+  margin: 0;
+  text-align: left;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+body {
+  font: 15px Arial, sans-serif;
+  font-style: normal;
+  line-height: 1.6;
+  color: #4C4C4C;
+}
+
+.container {
+  width: 800px;
+  margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5,
+.h1, .h2, .h3, .h4, .h5 {
+  margin-top: 0;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #545454;
+}
+
+p {
+  margin-top: 0;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.hide {
+  display: none !important;
+}
+
+.over-hidden {
+  overflow: hidden;
+}
+
+.small {
+  font-size: 50%;
+}
+
+.app-title {
+  padding-top: 3rem;
+  font-size: 2rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.app-input {
+  width: 100%;
+  min-height: 200px;
+  max-height: 500px;
+  padding: 5px;
+  border: 1px solid #bfbfbf;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  resize: vertical;
+}
+
+.app-legend {
+  margin: 1rem 0;
+  text-align: center;
+  color: #545454;
+}
+.app-legend p {
+  margin: 0;
+}
+
+.rel-line {
+  position: relative;
+  height: 0;
+}
+.rel-line .locale {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: rgba(241, 205, 179, 0.8);
+  color: #545454;
+  text-transform: uppercase;
+}
+
+.keys {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #bfbfbf;
+  border-radius: 5px;
+  margin-top: 1rem;
+  padding: 4px;
+}
+.keys--en .lang:not(.lang--en) {
+  display: none;
+}
+.keys--ru .lang:not(.lang--ru) {
+  display: none;
+}
+.keys--caps-off .caps:not(.caps--off) {
+  display: none;
+}
+.keys--caps-on .caps:not(.caps--on) {
+  display: none;
+}
+
+.key {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  margin: 3px;
+  border-radius: 5px;
+  background-color: #e5e5e5;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 45px;
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 200ms, background-color 200ms;
+}
+.key::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.key:hover {
+  background-color: #FDDCC4;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.7) inset;
+}
+.key:active, .key.active {
+  background-color: #F1CDB3;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5) inset;
+}
+.key--s {
+  background-color: #bfbfbf;
+}
+.key--Backspace {
+  width: 120px;
+}
+.key--Tab {
+  width: 58px;
+}
+.key--Delete {
+  width: 56px;
+}
+.key--CapsLock {
+  width: 86px;
+}
+.key--Enter {
+  width: 130px;
+}
+.key--ShiftLeft {
+  width: 104px;
+}
+.key--ShiftRight {
+  width: 112px;
+}
+.key--ControlLeft, .key--ControlRight {
+  width: 60px;
+}
+.key--AltLeft, .key--AltRight {
+  width: 60px;
+}
+.key--OSLeft {
+  width: 60px;
+}
+.key--Space {
+  width: 299px;
+}
+
+/*# sourceMappingURL=style.css.map */
