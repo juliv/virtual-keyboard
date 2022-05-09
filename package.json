@@ -1,0 +1,13 @@
+{
+  "name": "virtual-keyboard",
+  "version": "1.0.0",
+  "author": {
+    "name" : "Ivan Gavrilov",
+    "email" : "julivgan@gmail.com"
+  },
+  "homepage": "https://github.com/juliv/virtual-keyboard#readme",
+  "private": true,
+  "dependencies": {
+    "eslint-config-airbnb": "^19.0.4"
+  }
+}
