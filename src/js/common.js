@@ -7,7 +7,8 @@ import locale from './locale.js'
 const createSkeleton = () => {
   document.body.insertAdjacentHTML('afterbegin', `
     <div class="container">
-      <h1 class="app-title">Виртуальная клавиатура (JSFE2022Q1)</h1>
+      <h1 class="app-title">Виртуальная клавиатура <br> <span class="small">(JSFE2022Q1)</span></h1>
+      <div class="rel-line"><span class="locale" id="app-locale"></span></div>
       <textarea class="app-input" id="app-input"></textarea>
       <div id="kb" class="keys"></div>
       <div class="app-legend">
@@ -99,13 +100,27 @@ const keyInsert = (keyCode, caps = false) => {
 }
 
 const insertToTextarea = (text) => {
-  if (input.selectionStart || input.selectionStart === 0) {
-    const pos = [ input.selectionStart, input.selectionEnd ]
-    input.value = input.value.substring(0, pos[0]) + text + input.value.substring(pos[1])
-    input.selectionStart = pos[0] + text.length;
-    input.selectionEnd = pos[0] + text.length;
+  const pos = [ input.selectionStart, input.selectionEnd ]
+  if (text === 'Backspace' || text === 'Delete') {
+    if (pos[0] !== pos[1]) {
+      input.value = input.value.substring(0, pos[0]) + input.value.substring(pos[1])
+      input.selectionStart = pos[0]
+      input.selectionEnd = pos[0]
+    } else if (text === 'Backspace') {
+      const pos0 = (pos[0] > 1) ? (pos[0] - 1) : 0
+      input.value = input.value.substring(0, pos0) + input.value.substring(pos[1])
+      input.selectionStart = pos0
+      input.selectionEnd = pos0
+    } else if (text === 'Delete') {
+      const pos1 = (pos[1] < input.value.length-1) ? (pos[1] + 1) : input.value.length
+      input.value = input.value.substring(0, pos[0]) + input.value.substring(pos1)
+      input.selectionStart = pos[0]
+      input.selectionEnd = pos[0]
+    }
   } else {
-    input.value += text
+    input.value = input.value.substring(0, pos[0]) + text + input.value.substring(pos[1])
+    input.selectionStart = pos[0] + text.length
+    input.selectionEnd = pos[0] + text.length
   }
 }
 
@@ -116,9 +131,6 @@ const addEvents = () => {
 
   document.addEventListener('keydown', (e) => {
     e.preventDefault()
-
-    // console.log(e.key, '-', e.code, e.shiftKey, e.ctrlKey, e.altKey, e.getModifierState('CapsLock'))
-
     const capsActive = e.getModifierState('CapsLock')
     const caps = Boolean(capsActive ^ e.shiftKey)
     if (capsActive) {
@@ -152,8 +164,6 @@ const addEvents = () => {
   kb.addEventListener('click', (e) => {
     e.preventDefault()
 
-    // console.log(e.key, '-', e.code, e.shiftKey, e.ctrlKey, e.altKey, e.getModifierState('CapsLock'))
-
     const _this = e.target
     const caps = Boolean(e.getModifierState('CapsLock') ^ e.shiftKey)
 
@@ -170,12 +180,15 @@ const addEvents = () => {
 
 }
 
+/**/
+
 createSkeleton()
 
 const kb = document.getElementById('kb')
 const input = document.getElementById('app-input')
 input.value = ''
 
+locale.printLocale()
 createKeys(keys)
 showKeys()
 addEvents()

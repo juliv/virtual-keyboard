@@ -1,6 +1,9 @@
+@use "sass:color"
+
 .app-title
-  padding-top: 1rem
+  padding-top: 3rem
   font-size: 2rem
+  line-height: 1
   text-align: center
 
 .app-input
@@ -20,3 +23,17 @@
 
   p
     margin: 0
+
+.rel-line
+  position: relative
+  height: 0
+
+  .locale
+    position: absolute
+    right: 10px
+    top: 10px
+    padding: 5px 10px
+    border-radius: $border-radius
+    background-color: transparentize($color-primary, 0.2)
+    color: $color-dark-l
+    text-transform: uppercase

@@ -34,7 +34,7 @@ const keys = [
   { code: 'BracketLeft',  value: { 'en': ['[', '{'], 'ru': ['х', 'Х'] } },
   { code: 'BracketRight', value: { 'en': [']', '}'], 'ru': ['ъ', 'Ъ'] } },
   { code: 'Backslash',    value: { 'en': ['\\','|'], 'ru': ['\\','/'] } },
-  { code: 'Delete',       label: 'Del', value: 'Del', s: true },
+  { code: 'Delete',       label: 'Del', value: 'Delete', s: true },
 
   // 3 line
   { code: 'CapsLock',     label: 'Caps', s: true },

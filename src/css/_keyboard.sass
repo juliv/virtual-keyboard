@@ -18,6 +18,7 @@
     display: none
 
 .key
+  position: relative
   width: 45px
   height: 45px
   margin: 3px
@@ -30,6 +31,16 @@
   cursor: pointer
   user-select: none
   transition: box-shadow $trans-delay, background-color $trans-delay
+
+  // Чтобы событие всегда срабатывало на кнопке .key
+  &::after
+    content: ' '
+    display: block
+    position: absolute
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
 
   &:hover
     background-color: $color-primary-l
