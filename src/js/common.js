@@ -22,9 +22,10 @@ const createSkeleton = () => {
  * Создание html для клавиш виртуальной клавиатуры
  * @param {Array} keys - массив из keys.js
  */
+// eslint-disable-next-line no-shadow
 const createKeys = (keys) => {
   let html = ''
-  for (const id in keys) {
+  for (let id = 0; id < keys.length; id++) {
     const {
       code,
       label = null,
@@ -36,16 +37,17 @@ const createKeys = (keys) => {
     if (label !== null) {
       item = label
     } else {
-      for (const l in value) {
-        item += `<span class="lang lang--${l}">
-            <span class="caps caps--off">${value[l][0]}</span>
-            <span class="caps caps--on">${value[l][1]}</span>
+      const ll = Object.keys(value)
+      for (let i = 0; i < ll.length; i++) {
+        item += `<span class="lang lang--${ll[i]}">
+            <span class="caps caps--off">${value[ll[i]][0]}</span>
+            <span class="caps caps--on">${value[ll[i]][1]}</span>
           </span>`
       }
     }
     html += `<div class="key key--${code}${suffix}" data-id="${id}">${item}</div>`
   }
-  kb.innerHTML = html
+  document.getElementById('kb').innerHTML = html
 }
 
 /**
@@ -54,6 +56,7 @@ const createKeys = (keys) => {
  */
 const showKeys = (caps = false) => {
   const lang = locale.current()
+  const kb = document.getElementById('kb')
   kb.className = `keys keys--${lang} keys--caps-${caps ? 'on' : 'off'}`
 }
 
@@ -63,7 +66,7 @@ const showKeys = (caps = false) => {
  * @param {boolean} state
  */
 const changeKeyActive = (keyCode, state) => {
-  const key = document.querySelector('div.key--' + keyCode)
+  const key = document.querySelector(`div.key--${keyCode}`)
   if (key !== null) {
     if (state) {
       key.classList.add('active')
@@ -80,10 +83,10 @@ const changeKeyActive = (keyCode, state) => {
  * @returns {string}
  */
 const keyInsert = (keyCode, caps = false) => {
-  const key = document.querySelector('div.key--' + keyCode)
+  const key = document.querySelector(`div.key--${keyCode}`)
   const lang = locale.current()
   if (key !== null) {
-    const keyId = parseInt(key.dataset.id || -1)
+    const keyId = parseInt(key.dataset.id || -1, 10)
     if (keyId in keys) {
       const {
         value = '',
@@ -91,7 +94,8 @@ const keyInsert = (keyCode, caps = false) => {
       } = keys[keyId]
       if (typeof value === 'string' && value) {
         return value
-      } else if (typeof value === 'object' && !s) {
+      }
+      if (typeof value === 'object' && !s) {
         return value[lang][!caps ? 0 : 1]
       }
     }
@@ -100,7 +104,8 @@ const keyInsert = (keyCode, caps = false) => {
 }
 
 const insertToTextarea = (text) => {
-  const pos = [ input.selectionStart, input.selectionEnd ]
+  const input = document.getElementById('app-input')
+  const pos = [input.selectionStart, input.selectionEnd]
   if (text === 'Backspace' || text === 'Delete') {
     if (pos[0] !== pos[1]) {
       input.value = input.value.substring(0, pos[0]) + input.value.substring(pos[1])
@@ -112,7 +117,7 @@ const insertToTextarea = (text) => {
       input.selectionStart = pos0
       input.selectionEnd = pos0
     } else if (text === 'Delete') {
-      const pos1 = (pos[1] < input.value.length-1) ? (pos[1] + 1) : input.value.length
+      const pos1 = (pos[1] < input.value.length - 1) ? (pos[1] + 1) : input.value.length
       input.value = input.value.substring(0, pos[0]) + input.value.substring(pos1)
       input.selectionStart = pos[0]
       input.selectionEnd = pos[0]
@@ -128,7 +133,7 @@ const insertToTextarea = (text) => {
  * Навешивание событий на клавиатуру
  */
 const addEvents = () => {
-
+  const kb = document.getElementById('kb')
   document.addEventListener('keydown', (e) => {
     e.preventDefault()
     const capsActive = e.getModifierState('CapsLock')
@@ -164,27 +169,24 @@ const addEvents = () => {
   kb.addEventListener('click', (e) => {
     e.preventDefault()
 
-    const _this = e.target
+    const t = e.target
     const caps = Boolean(e.getModifierState('CapsLock') ^ e.shiftKey)
 
-    if (_this.classList.contains('key')) {
-      const id = parseInt(_this.dataset.id || -1)
+    if (t.classList.contains('key')) {
+      const id = parseInt(t.dataset.id || -1, 10)
       const key = (id in keys) ? keys[id] : null
       if (key) {
         const k = keyInsert(key.code, caps)
         insertToTextarea(k)
       }
     }
-
   })
-
 }
 
 /**/
 
 createSkeleton()
 
-const kb = document.getElementById('kb')
 const input = document.getElementById('app-input')
 input.value = ''
 

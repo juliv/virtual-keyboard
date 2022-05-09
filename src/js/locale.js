@@ -6,9 +6,7 @@
  * Текущий язык
  * @return {string}
  */
-const current = () => {
-  return localStorage.getItem('locale') || 'en'
-}
+const current = () => localStorage.getItem('locale') || 'en'
 
 /**
  * Установка языка
@@ -18,7 +16,7 @@ const setLocale = (locale) => {
   const locales = ['ru', 'en']
   const l = (locales.indexOf(locale) !== -1) ? locale : 'en'
   localStorage.setItem('locale', l)
-  printLocale()
+  this.printLocale()
 }
 
 /**
