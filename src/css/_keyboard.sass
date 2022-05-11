@@ -1,0 +1,80 @@
+.keys
+  display: flex
+  flex-wrap: wrap
+  border: 1px solid $color-dark-m
+  border-radius: $border-radius
+  margin-top: 1rem
+  padding: 4px
+
+  &--en .lang:not(.lang--en)
+    display: none
+
+  &--ru .lang:not(.lang--ru)
+    display: none
+
+  &--caps-off .caps:not(.caps--off)
+    display: none
+  &--caps-on .caps:not(.caps--on)
+    display: none
+
+.key
+  position: relative
+  width: 45px
+  height: 45px
+  margin: 3px
+  border-radius: $border-radius
+  background-color: $color-dark-s
+  text-align: center
+  font-size: 1.1rem
+  font-weight: bold
+  line-height: 45px
+  cursor: pointer
+  user-select: none
+  transition: box-shadow $trans-delay, background-color $trans-delay
+
+  // Чтобы событие всегда срабатывало на кнопке .key
+  &::after
+    content: ' '
+    display: block
+    position: absolute
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+
+  &:hover
+    background-color: $color-primary-l
+    box-shadow: 0 0 8px rgba(255,255,255, 0.7) inset
+
+  &:active,
+  &.active
+    background-color: $color-primary
+    box-shadow: 0 0 8px rgba(0,0,0, 0.5) inset
+
+  &--s
+    background-color: $color-dark-m
+
+  &--Backspace
+    width: 120px
+  &--Tab
+    width: 58px
+  &--Delete
+    width: 56px
+  &--CapsLock
+    width: 86px
+  &--Enter
+    width: 130px
+  &--ShiftLeft
+    width: 104px
+  &--ShiftRight
+    width: 112px
+  &--ControlLeft,
+  &--ControlRight
+    width: 60px
+  &--AltLeft,
+  &--AltRight
+    width: 60px
+  &--OSLeft
+    width: 60px
+  &--Space
+    width: 299px
