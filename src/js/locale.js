@@ -9,6 +9,13 @@
 const current = () => localStorage.getItem('locale') || 'en'
 
 /**
+ * Вывод текущего языка в html
+ */
+const printLocale = () => {
+  document.getElementById('app-locale').innerText = current()
+}
+
+/**
  * Установка языка
  * @param {string} locale - 'en' или 'ru'
  */
@@ -16,14 +23,7 @@ const setLocale = (locale) => {
   const locales = ['ru', 'en']
   const l = (locales.indexOf(locale) !== -1) ? locale : 'en'
   localStorage.setItem('locale', l)
-  this.printLocale()
-}
-
-/**
- * Вывод текущего языка в html
- */
-const printLocale = () => {
-  document.getElementById('app-locale').innerText = current()
+  printLocale()
 }
 
 /**
@@ -36,6 +36,5 @@ const switchLocale = () => {
 export default {
   current,
   setLocale,
-  switchLocale,
-  printLocale
+  switchLocale
 }

@@ -20,18 +20,17 @@ const createSkeleton = () => {
 
 /**
  * Создание html для клавиш виртуальной клавиатуры
- * @param {Array} keys - массив из keys.js
+ * @param {Array} kk - массив из keys.js
  */
-// eslint-disable-next-line no-shadow
-const createKeys = (keys) => {
+const createKeys = (kk) => {
   let html = ''
-  for (let id = 0; id < keys.length; id++) {
+  for (let id = 0; id < kk.length; id++) {
     const {
       code,
       label = null,
       value = null,
       s = false
-    } = keys[id]
+    } = kk[id]
     const suffix = s ? ' key--s' : ''
     let item = ''
     if (label !== null) {
@@ -103,6 +102,12 @@ const keyInsert = (keyCode, caps = false) => {
   return ''
 }
 
+/**
+ * Вставка текста в textarea в зависимости от положения курсора.
+ * Особые условия для `Backspace` и `Delete`.
+ * Всегда переводим фокус на поле, чтобы был виден курсор.
+ * @param text
+ */
 const insertToTextarea = (text) => {
   const input = document.getElementById('app-input')
   const pos = [input.selectionStart, input.selectionEnd]
@@ -127,6 +132,7 @@ const insertToTextarea = (text) => {
     input.selectionStart = pos[0] + text.length
     input.selectionEnd = pos[0] + text.length
   }
+  input.focus()
 }
 
 /**
@@ -189,8 +195,9 @@ createSkeleton()
 
 const input = document.getElementById('app-input')
 input.value = ''
+input.focus()
 
-locale.printLocale()
+locale.setLocale('en')
 createKeys(keys)
 showKeys()
 addEvents()
