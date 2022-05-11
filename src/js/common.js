@@ -197,7 +197,7 @@ const input = document.getElementById('app-input')
 input.value = ''
 input.focus()
 
-locale.setLocale('en')
+locale.setLocale(locale.current())
 createKeys(keys)
 showKeys()
 addEvents()
